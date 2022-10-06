@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        .film-card {
+            background-color: aquamarine;
+            border: 1px solid #000;
+            margin: 10px;
+            width: 200px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        body {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .body-night {
+            background-color: #3b3b3b;
+        }
+
+        input {
+            margin-top: 10px;
+        }
+
+        .change {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        span {
+            font-family: 'Arial', sans-serif;
+            font-size: 24px;
+        }
+
+        .switcher {
+            width: 60px;
+            padding: 0 5px;
+            height: 30px;
+            background-color: #b1f3ff;
+            border-radius: 20px;
+            border: 2px solid #606060;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .moon-sun {
+            width: 25px;
+            height: 25px;
+            border-radius: 100%;
+            position: absolute;
+            background-color: #fff167;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://unpkg.com/cookielib/src/cookie.min.js"></script>
+    {#
+        базовый шаблон, который используют остальные шаблоны
+        имеет общую структуру, чтобы не дублировать код
+
+        инициируем блок body, который переопределяется в шаблонах
+    #}
+    {% block body %}{% endblock %}
+    <script>
+        const body = document.getElementsByTagName('body')[0]
+        const div = document.getElementsByTagName('div')
+        let filmCards = document.querySelectorAll('.film-card');
+        let h1 = document.getElementsByTagName('h1')
+        if (h1 === null) {
+            h1 = []
+        }
+        if (filmCards === null) {
+            filmCards = []
+        }
+        if (getCookie('theme') === undefined) {
+            setCookie('theme', 'day');
+        } else if (getCookie('theme') === 'night') {
+            body.classList.add('body-night');
+            for (let i = 0; i < h1.length; i++) {
+                h1[i].style.color = '#fff'
+            }
+            for (let i = 0; i < div.length; i++) {
+                div[i].style.color = '#fff'
+            }
+            for (let i = 0; i < filmCards.length; i++) {
+                filmCards[i].style.backgroundColor = '#858585'
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <form action="" method="post">
+        <h1>Добавление нового фильма</h1>
+        <input type="text" name="title" placeholder="Название фильма"><br>
+        <input type="number" step="0.1" max="10" name="rating" placeholder="Рейтинг"><br>
+        <input type="text" name="country" placeholder="Страна"><br>
+        <input type="submit">
+    </form>
+{% endblock %}

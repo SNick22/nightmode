@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <form action="" method="post" class="change">
+        <span>Change mode</span>
+        <div class="switcher">
+            <div class="moon-sun"></div>
+        </div>
+    </form>
+    <script>
+        const switcher = document.querySelector('.switcher');
+        const circle = document.querySelector('.moon-sun');
+        const span = document.getElementsByTagName('span')[0];
+
+        if (getCookie('theme') === undefined) {
+            setCookie('theme', 'day');
+        } else if (getCookie('theme') === 'night') {
+            switcher.style.justifyContent = 'flex-end';
+            switcher.style.backgroundColor = '#303041';
+            switcher.style.borderColor = '#fff';
+            span.style.color = '#fff';
+        }
+
+        switcher.addEventListener('click', () => {
+            if (getCookie('theme') === 'night') {
+                circle.style.transition = '0.5s';
+                if (circle.style.transform === '') {
+                    circle.style.transform = 'translateX(-35px)'
+                } else {
+                    circle.style.transform = null
+                }
+                switcher.style.transition = '0.5s';
+                switcher.style.backgroundColor = '#b1f3ff';
+                switcher.style.borderColor = '#606060';
+                body.style.transition = '0.5s';
+                body.classList.toggle('body-night');
+                span.style.transition = '0.5s';
+                span.style.color = '#000';
+                setCookie('theme', 'day');
+            } else {
+                circle.style.transition = '0.5s';
+                if (circle.style.transform === '') {
+                    circle.style.transform = 'translateX(35px)'
+                } else {
+                    circle.style.transform = null
+                }
+                switcher.style.transition = '0.5s';
+                switcher.style.backgroundColor = '#303041';
+                switcher.style.borderColor = '#fff';
+                body.style.transition = '0.5s';
+                body.classList.toggle('body-night');
+                span.style.transition = '0.5s';
+                span.style.color = '#fff';
+                setCookie('theme', 'night');
+            }
+        });
+    </script>
+{% endblock %}
